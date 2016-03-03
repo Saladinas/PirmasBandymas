@@ -7,6 +7,7 @@ package lt.vu.entities;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -79,23 +80,34 @@ public class Copy implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (id != null ? id.hashCode() : 0);
+        int hash = 7;
+        hash = 43 * hash + Objects.hashCode(this.printDate);
+        hash = 43 * hash + Objects.hashCode(this.bookId);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Copy)) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
             return false;
         }
-        Copy other = (Copy) object;
-        if ((this.id == null && other.id != null) || (this.id != null && !this.id.equals(other.id))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Copy other = (Copy) obj;
+        if (!Objects.equals(this.printDate, other.printDate)) {
+            return false;
+        }
+        if (!Objects.equals(this.bookId, other.bookId)) {
             return false;
         }
         return true;
     }
+
+    
 
     @Override
     public String toString() {
